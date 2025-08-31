@@ -6,10 +6,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 1
     Si posicion_tiro = 1 Entonces
-        parte1 <- " O "
+        parte1 <-     " O "
 	Sino 
 		Si posicion_atajada = 1 Entonces
-			parte1 <- "X"
+			parte1 <- " X "
 		Sino
 			parte1 <- "   "
 		FinSi
@@ -17,10 +17,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 2
     Si posicion_tiro = 2 Entonces
-        parte2 <- " O "
+        parte2 <-     " O "
 	Sino 
 		Si posicion_atajada = 2 Entonces
-			parte2 <- "X"
+			parte2 <- " X "
 		Sino
 			parte2 <- "   "
 		FinSi
@@ -28,10 +28,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 3
     Si posicion_tiro = 3 Entonces
-        parte3 <- " O "
+        parte3 <-     " O "
 	Sino 
 		Si posicion_atajada = 3 Entonces
-			parte3 <- "X"
+			parte3 <- " X "
 		Sino
 			parte3 <- "   "
 		FinSi
@@ -39,10 +39,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 4
     Si posicion_tiro = 4 Entonces
-        parte4 <- " O "
+        parte4 <-     " O "
 	Sino 
 		Si posicion_atajada = 4 Entonces
-			parte4 <- "X"
+			parte4 <- " X "
 		Sino
 			parte4 <- "   "
 		FinSi
@@ -50,10 +50,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 5
     Si posicion_tiro = 5 Entonces
-        parte5 <- " O "
+        parte5 <-     " O "
 	Sino 
 		Si posicion_atajada = 5 Entonces
-			parte5 <- "X"
+			parte5 <- " X "
 		Sino
 			parte5 <- "   "
 		FinSi
@@ -62,10 +62,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	
     // Celda 6
     Si posicion_tiro = 6 Entonces
-        parte6 <- " O "
+        parte6 <-     " O "
 	Sino 
 		Si posicion_atajada = 6 Entonces
-			parte6 <- "X"
+			parte6 <- " X "
 		Sino
 			parte6 <- "   "
 		Finsi
@@ -73,10 +73,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
     
 	// Celda 7
     Si posicion_tiro = 7 Entonces
-        parte7 <- " O "
+        parte7 <-     " O "
 	Sino 
 		Si posicion_atajada = 7 Entonces
-			parte7 <- "X"
+			parte7 <- " X "
 		Sino
 			parte7 <- "   "
 		FinSi
@@ -85,10 +85,10 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
     
 	// Celda 8
     Si posicion_tiro = 8 Entonces
-        parte8 <- " O "
+        parte8 <-     " O "
 	Sino 
 		Si posicion_atajada = 8 Entonces
-			parte8 <- "X"
+			parte8 <- " X "
 		Sino
 			parte8 <- "   "
 		FinSi
@@ -97,38 +97,50 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
     
 	// Celda 9
     Si posicion_tiro = 9 Entonces
-        parte9 <- " O "
+        parte9 <-     " O "
 	Sino 
 		Si posicion_atajada = 9 Entonces
-			parte9 <- "X"
+			parte9 <- " X "
 		Sino
-			parte9 <- "  "
+			parte9 <- "   "
 		FinSi
 		
     FinSi
     
 	// INTERFACE ARCO
     Limpiar Pantalla;
-    //Escribir "    ___________"
-    //Escribir "   /           /"
-    //Escribir "  /             /"
-    Escribir "  ___ ___ ___"
-    Escribir " |", parte7,"|", parte8, "|", parte9, "|"
-    Escribir " |___|___|___|"
-    Escribir " |", parte4,"|", parte5, "|", parte6, "|"
-    Escribir " |___|___|___|"
-    Escribir " |", parte1,"|", parte2, "|", parte3, "|"
-    Escribir " |___|___|___|"
-    Escribir ""
+
+	Para i <- 1 Hasta 5 Hacer
+		Escribir ""
+	FinPara
+	//CentrarTexto("****************************************************")
+	CentrarTexto("  ___ ___ ___")
+	CentrarTexto(" |"+ parte7+"|"+ parte8+ "|"+ parte9+ "|")
+	CentrarTexto(" |___|___|___|")
+	CentrarTexto(" |"+ parte4+"|"+ parte5+ "|"+ parte6+ "|")
+	CentrarTexto(" |___|___|___|")
+	CentrarTexto(" |"+ parte1+"|"+ parte2+ "|"+ parte3+ "|")
+	CentrarTexto(" |___|___|___|")
+	CentrarTexto("")
+	//
+    //Escribir "  ___ ___ ___"
+    //Escribir " |", parte7,"|", parte8, "|", parte9, "|"
+    //Escribir " |___|___|___|"
+    //Escribir " |", parte4,"|", parte5, "|", parte6, "|"
+    //Escribir " |___|___|___|"
+    //Escribir " |", parte1,"|", parte2, "|", parte3, "|"
+    //Escribir " |___|___|___|"
+    //Escribir ""
 	
     Si esGol Entonces
-        Escribir "¡¡¡ G O O O O O L !!!"
+        CentrarTexto("¡¡¡ G O O O O O L !!!")
     Sino
-        Escribir "¡¡¡ ATAJÓ EL ARQUERO !!!"
+        CentrarTexto("¡¡¡ ATAJÓ EL ARQUERO !!!")
     FinSi
 	
     Escribir ""
-    Escribir "Presiona Enter para continuar..."
+    CentrarTexto("Presiona Enter para continuar...")
+	Escribir ""
     Esperar Tecla
 	
 Fin Funcion
@@ -155,29 +167,33 @@ Funcion EjecutarTandaPenales(modo_de_juego)
 	
     Mientras ronda <= 5 Y NO partida_abandonada Hacer
         Limpiar Pantalla
-        Escribir "****************************************************"
-        Escribir "RONDA ", ConvertirATexto(ronda), " de 5"
-        Escribir "MARCADOR: ", nombre_j1, " ", ConvertirATexto(goles_j1), " - ", nombre_j2, " ", ConvertirATexto(goles_j2)
-        Escribir "****************************************************"
+		
+		Para i<-1 Hasta 5 Con Paso 1 Hacer
+			Escribir ""
+		Fin Para
+        CentrarTexto("****************************************************")
+        CentrarTexto("RONDA "+ ConvertirATexto(ronda)+ " de 5")
+        CentrarTexto("MARCADOR: "+ nombre_j1+ " "+ ConvertirATexto(goles_j1)+ " - "+ nombre_j2+ " "+ ConvertirATexto(goles_j2))
+        CentrarTexto("****************************************************")
         Escribir ""
 		
-        Escribir ">>> PATEA ", nombre_j1, " <<<"
+        CentrarTexto(">>> PATEA "+ nombre_j1+ " <<<")
         Repetir
-            Escribir "Elige una zona para disparar (1-9) o (0 para salir):"
+            CentrarTexto("Elige una zona para disparar (1-9) o (0 para salir):")
             Leer tiro
         Hasta Que tiro >= 0 Y tiro <= 9
 		
         Si tiro = 0 Entonces
             partida_abandonada <- Verdadero
         Sino
-            Escribir ">>> ATAJA ", nombre_j2, " <<<"
+            CentrarTexto(">>> ATAJA "+ nombre_j2+ " <<<")
             Si modo_de_juego = 1 Entonces
                 atajada <- Azar(9) + 1
-                Escribir "La Máquina elige su posición..."
+                CentrarTexto("La Máquina elige su posición...")
                 Esperar 1 Segundos
             Sino
                 Repetir
-                    Escribir "Elige una zona para atajar (1-9):"
+                    CentrarTexto("Elige una zona para atajar (1-9):")
                     Leer atajada
                 Hasta Que atajada >= 1 Y atajada <= 9
             FinSi
@@ -192,10 +208,13 @@ Funcion EjecutarTandaPenales(modo_de_juego)
             // Turno del jugador 2 / máquina
             Si NO partida_abandonada Entonces
                 Limpiar Pantalla
-                Escribir "****************************************************"
-                Escribir "RONDA " + ConvertirATexto(ronda) + " de 5"
-                Escribir "MARCADOR: ", nombre_j1, " ", ConvertirATexto(goles_j1), " - ", nombre_j2, " ", ConvertirATexto(goles_j2)
-                Escribir "****************************************************"
+				Para i <-1 Hasta 5 Con Paso 1 Hacer
+					Escribir " "
+				Fin Para
+                CentrarTexto("****************************************************")
+                CentrarTexto("RONDA " + ConvertirATexto(ronda) + " de 5")
+                CentrarTexto("MARCADOR: "+ nombre_j1+ " "+ ConvertirATexto(goles_j1)+ " - "+ nombre_j2+ " "+ ConvertirATexto(goles_j2))
+                CentrarTexto("****************************************************")
                 Escribir ""
 				
                 Escribir ">>> PATEA " + nombre_j2 + " <<<"
@@ -353,24 +372,26 @@ Funcion EjecutarModoApuestas(dummy)
 	
 	// PAGO DE APUESTAS
 	Si (resultado_fue_gol = 1 Y apuesta_j1 = 1) O (resultado_fue_gol = 0 Y apuesta_j1 = 2) Entonces
+		Escribir Sin Saltar"                                             "
 		Escribir "Jugador 1: ¡Acertaste! Ganas ", VALOR_APUESTA, " puntos."
 		puntos_j1 <- puntos_j1 + VALOR_APUESTA
 	Sino
-		Escribir "Jugador 1: ¡Fallaste! Pierdes ", VALOR_APUESTA, " puntos."
+		CentrarTexto("Jugador 1: ¡Fallaste! No ganaste puntos.")
 		puntos_j1 <- puntos_j1 - VALOR_APUESTA
 	FinSi
 	
 	Si (resultado_fue_gol = 1 Y apuesta_j2 = 1) O (resultado_fue_gol = 0 Y apuesta_j2 = 2) Entonces
+		Escribir Sin Saltar"                                             "
 		Escribir "Jugador 2: ¡Acertaste! Ganas ", VALOR_APUESTA, " puntos."
 		puntos_j2 <- puntos_j2 + VALOR_APUESTA
 	Sino
-		Escribir "Jugador 2: ¡Fallaste! Pierdes ", VALOR_APUESTA, " puntos."
+		CentrarTexto("Jugador 2: ¡Fallaste! No ganaste puntos.")
 		puntos_j2 <- puntos_j2 - VALOR_APUESTA
 	FinSi
 	
 	ronda <- ronda + 1
 	Escribir ""
-	Escribir "Presiona Enter para la siguiente ronda..."
+	CentrarTexto("Presiona Enter para la siguiente ronda...")
 	Esperar Tecla
 	FinMientras
 
