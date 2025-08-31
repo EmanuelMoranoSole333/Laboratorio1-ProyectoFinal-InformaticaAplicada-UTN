@@ -123,15 +123,7 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	CentrarTexto(" |___|___|___|")
 	CentrarTexto("")
 	//
-    //Escribir "  ___ ___ ___"
-    //Escribir " |", parte7,"|", parte8, "|", parte9, "|"
-    //Escribir " |___|___|___|"
-    //Escribir " |", parte4,"|", parte5, "|", parte6, "|"
-    //Escribir " |___|___|___|"
-    //Escribir " |", parte1,"|", parte2, "|", parte3, "|"
-    //Escribir " |___|___|___|"
-    //Escribir ""
-	
+
     Si esGol Entonces
         CentrarTexto("¡¡¡ G O O O O O L !!!")
     Sino
@@ -153,11 +145,20 @@ Funcion EjecutarTandaPenales(modo_de_juego)
     Definir partida_abandonada Como Logico;
     Definir nombre_j1, nombre_j2 Como Caracter;
 	
-    nombre_j1 <- "Jugador 1"
+	//NOMBRE
+	Limpiar Pantalla
+	Para i<-1 Hasta 5 Con Paso 1 Hacer
+		Escribir ""
+	Fin Para
+	
+	CentrarTexto("Ingrese el nombre del Jugador 1:")
+	Leer nombre_j1
+	
     Si modo_de_juego = 1 Entonces
         nombre_j2 <- "Máquina"
     Sino
-        nombre_j2 <- "Jugador 2"
+        CentrarTexto("Ingrese el nombre del Jugador 2:")
+		Leer nombre_j2
     FinSi
 	
     goles_j1 <- 0
@@ -217,21 +218,21 @@ Funcion EjecutarTandaPenales(modo_de_juego)
                 CentrarTexto("****************************************************")
                 Escribir ""
 				
-                Escribir ">>> PATEA " + nombre_j2 + " <<<"
+                CentrarTexto(">>> PATEA " + nombre_j2 + " <<<")
                 Si modo_de_juego = 1 Entonces
                     tiro <- Azar(9) + 1
-                    Escribir "La Máquina elige su disparo..."
+                    CentrarTexto("La Máquina elige su disparo...")
                     Esperar 1 Segundos
                 Sino
                     Repetir
-                        Escribir "Elige una zona para disparar (1-9):"
+                        CentrarTexto("Elige una zona para disparar (1-9):")
                         Leer tiro
                     Hasta Que tiro >= 1 Y tiro <= 9
                 FinSi
                 
-                Escribir ">>> ATAJA " + nombre_j1 + " <<<"
+                CentrarTexto(">>> ATAJA " + nombre_j1 + " <<<")
                 Repetir
-                    Escribir "Elige una zona para atajar (1-9) o (0 para salir):"
+                    CentrarTexto("Elige una zona para atajar (1-9) o (0 para salir):")
                     Leer atajada
                 Hasta Que atajada >= 0 Y atajada <= 9
                 
@@ -253,28 +254,34 @@ Funcion EjecutarTandaPenales(modo_de_juego)
 	
     Limpiar Pantalla
     Si partida_abandonada Entonces
-        Escribir "============================================="
-        Escribir "||       HAS ABANDONADO LA PARTIDA       ||"
-        Escribir "============================================="
+		Para i<-1 Hasta 5 Con Paso paso Hacer
+			Escribir ""
+		Fin Para
+        CentrarTexto("=============================================")
+        CentrarTexto("||       HAS ABANDONADO LA PARTIDA         ||")
+        CentrarTexto("=============================================")
     Sino
-        Escribir "============================================="
-        Escribir "||            FIN DEL PARTIDO            ||"
-        Escribir "============================================="
-        Escribir "Marcador final: ", nombre_j1, " ", ConvertirATexto(goles_j1), " - ", nombre_j2, " ", ConvertirATexto(goles_j2)
+		Para i<-1 Hasta 5 Con Paso paso Hacer
+			Escribir ""
+		Fin Para
+        CentrarTexto("=============================================")
+        CentrarTexto("||            FIN DEL PARTIDO              ||")
+        CentrarTexto("=============================================")
+        CentrarTexto("Marcador final: "+ nombre_j1+ " "+ ConvertirATexto(goles_j1)+ " - "+ nombre_j2+ " "+ ConvertirATexto(goles_j2))
         Escribir ""
         Si goles_j1 > goles_j2 Entonces
-            Escribir "¡¡¡ GANA ", nombre_j1, " !!!"
+            CentrarTexto("¡¡¡ GANA "+ nombre_j1+ " !!!")
 		Sino
 			Si goles_j2 > goles_j1 Entonces
-				Escribir "¡¡¡ GANA ", nombre_j2, " !!!"
+				CentrarTexto("¡¡¡ GANA "+ nombre_j2+ " !!!")
 			Sino
-				Escribir "¡El resultado es un EMPATE!"
+				CentrarTexto("¡El resultado es un EMPATE!")
 			FinSi
 			
         FinSi
     FinSi
     Escribir ""
-    Escribir "Presiona Enter para volver al menú principal..."
+    CentrarTexto("Presiona Enter para volver al menú principal...")
     Esperar Tecla
 Fin Funcion
 // =============================================================================
@@ -284,9 +291,21 @@ Funcion EjecutarModoApuestas(dummy)
 	Definir puntos_j1, puntos_j2, ronda, apuesta_j1, apuesta_j2, tiro_cpu, atajada_cpu Como Entero
 	Definir VALOR_APUESTA Como Entero
 	Definir resultado_fue_gol Como Entero
+	//Definir nombre_j1, nombre_j2 Como Caracter
 	Definir i Como Entero
-	puntos_j1 <- 50
-	puntos_j2 <- 50
+	//PEDIR NOMBRES
+	Limpiar Pantalla
+	Para i<-1 Hasta 5 Con Paso 1 Hacer
+		Escribir ""
+	Fin Para
+	CentrarTexto("--- MODO APUESTAS ---")
+	CentrarTexto("Ingrese nombre del jugador 1:")
+	Leer nombre_j1
+	CentrarTexto("Ingrese nombre del jugador 2:")
+	Leer nombre_j2
+	
+	puntos_j1 <- 0
+	puntos_j2 <- 0
 	VALOR_APUESTA <- 10
 	ronda <- 1
 	
@@ -297,13 +316,13 @@ Funcion EjecutarModoApuestas(dummy)
 		FinPara
 		CentrarTexto("****************************************************")
         CentrarTexto("RONDA DE APUESTAS "+ ConvertirATexto(ronda)+ " de 5")
-        CentrarTexto("PUNTAJE: Jugador 1 ["+ ConvertirATexto(puntos_j1)+ "] - Jugador 2 ["+ ConvertirATexto(puntos_j2)+ "]")
+        CentrarTexto("PUNTAJE: "+ nombre_j1+" [" + ConvertirATexto(puntos_j1)+ "] - "+ nombre_j2 +" ["+ ConvertirATexto(puntos_j2)+ "]")
         CentrarTexto("****************************************************")
         Escribir ""
 	//FinMientras
 	
 	// APUESTA JUGADOR 1
-	CentrarTexto(">>> TURNO DE APUESTA: JUGADOR 1 <<<")
+	CentrarTexto(">>> TURNO DE APUESTA: "+ nombre_j1+" <<<")
 	Repetir
 		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
 		Leer apuesta_j1
@@ -317,10 +336,10 @@ Funcion EjecutarModoApuestas(dummy)
 			FinPara
 			CentrarTexto("****************************************************");
 			CentrarTexto("RONDA DE APUESTAS " + ConvertirATexto(ronda) + " de 5");
-			CentrarTexto("PUNTAJE: Jugador 1 [" + ConvertirATexto(puntos_j1) + "] - Jugador 2 [" + ConvertirATexto(puntos_j2) + "]");
+			CentrarTexto("PUNTAJE: "+ nombre_j1+" [" + ConvertirATexto(puntos_j1) + "] - "+nombre_j2+" [" + ConvertirATexto(puntos_j2) + "]");
 			CentrarTexto("****************************************************");
 			Escribir "";
-			CentrarTexto(">>> TURNO DE APUESTA: JUGADOR 1 <<<");
+			CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j1+" <<<");
 		FinSi
 	Hasta Que apuesta_j1 = 1 O apuesta_j1 = 2;
 	Limpiar Pantalla; // Oculta la apuesta del J1
@@ -331,10 +350,10 @@ Funcion EjecutarModoApuestas(dummy)
 	FinPara
 	CentrarTexto("****************************************************")
 	CentrarTexto("RONDA DE APUESTAS " + ConvertirATexto(ronda) + " de 5")
-	CentrarTexto("PUNTAJE: Jugador 1 [" + ConvertirATexto(puntos_j1) + "] - Jugador 2 [" + ConvertirATexto(puntos_j2) + "]")
+	CentrarTexto("PUNTAJE: "+ nombre_j1+" [" + ConvertirATexto(puntos_j1) + "] - "+ nombre_j2+" [" + ConvertirATexto(puntos_j2) + "]")
 	CentrarTexto("****************************************************")
 	Escribir ""
-	CentrarTexto(">>> TURNO DE APUESTA: JUGADOR 2 <<<")
+	CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j2+" <<<")
 	Repetir
 		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
 		Leer apuesta_j2
@@ -348,10 +367,10 @@ Funcion EjecutarModoApuestas(dummy)
 			FinPara
 			CentrarTexto("****************************************************")
 			CentrarTexto("RONDA DE APUESTAS "+ ConvertirATexto(ronda)+ " de 5")
-			CentrarTexto("PUNTAJE: Jugador 1 ["+ ConvertirATexto(puntos_j1)+ "] - Jugador 2 ["+ ConvertirATexto(puntos_j2)+ "]")
+			CentrarTexto("PUNTAJE: "+ nombre_j1+" ["+ ConvertirATexto(puntos_j1)+ "] - "+ nombre_j2+" ["+ ConvertirATexto(puntos_j2)+ "]")
 			CentrarTexto("****************************************************")
 			Escribir ""
-			CentrarTexto(">>> TURNO DE APUESTA: JUGADOR 2 <<<")
+			CentrarTexto(">>> TURNO DE APUESTA: "+ nombre_j2+" <<<")
 		FinSi
 	Hasta Que apuesta_j2 = 1 O apuesta_j2 = 2
 	
@@ -372,21 +391,19 @@ Funcion EjecutarModoApuestas(dummy)
 	
 	// PAGO DE APUESTAS
 	Si (resultado_fue_gol = 1 Y apuesta_j1 = 1) O (resultado_fue_gol = 0 Y apuesta_j1 = 2) Entonces
-		Escribir Sin Saltar"                                             "
-		Escribir "Jugador 1: ¡Acertaste! Ganas ", VALOR_APUESTA, " puntos."
+		CentrarTexto(nombre_j1+": ¡Acertaste! Ganas "+ ConvertirATexto(VALOR_APUESTA) + " puntos.")
 		puntos_j1 <- puntos_j1 + VALOR_APUESTA
 	Sino
-		CentrarTexto("Jugador 1: ¡Fallaste! No ganaste puntos.")
-		puntos_j1 <- puntos_j1 - VALOR_APUESTA
+		CentrarTexto(nombre_j1+": ¡Fallaste! No ganaste puntos.")
+		puntos_j1 <- puntos_j1 //- VALOR_APUESTA
 	FinSi
 	
 	Si (resultado_fue_gol = 1 Y apuesta_j2 = 1) O (resultado_fue_gol = 0 Y apuesta_j2 = 2) Entonces
-		Escribir Sin Saltar"                                             "
-		Escribir "Jugador 2: ¡Acertaste! Ganas ", VALOR_APUESTA, " puntos."
+		CentrarTexto(nombre_j2+": ¡Acertaste! Ganas "+ ConvertirATexto(VALOR_APUESTA)+ " puntos.")
 		puntos_j2 <- puntos_j2 + VALOR_APUESTA
 	Sino
-		CentrarTexto("Jugador 2: ¡Fallaste! No ganaste puntos.")
-		puntos_j2 <- puntos_j2 - VALOR_APUESTA
+		CentrarTexto(nombre_j2+": ¡Fallaste! No ganaste puntos.")
+		puntos_j2 <- puntos_j2 //- VALOR_APUESTA
 	FinSi
 	
 	ronda <- ronda + 1
