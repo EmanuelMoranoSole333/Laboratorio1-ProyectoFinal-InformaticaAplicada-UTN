@@ -140,10 +140,11 @@ Fin Funcion
 // =============================================================================
 // FUNCIÓN #2: EJECUTA LA TANDA DE PENALES JUGADOR VS MAQUINA
 // =============================================================================
-Funcion EjecutarTandaPenales(modo_de_juego)
-    Definir goles_j1, goles_j2, ronda, tiro, atajada Como Entero;
-    Definir partida_abandonada Como Logico;
-    Definir nombre_j1, nombre_j2 Como Caracter;
+Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
+    Definir goles_j1, goles_j2, ronda, tiro, atajada Como Entero
+	//Definir tiro_texto como Cadena
+    Definir partida_abandonada Como Logico
+    Definir nombre_j1, nombre_j2, tiro_texto, atajada_texto Como Caracter
 	
 	//NOMBRE
 	Limpiar Pantalla
@@ -181,23 +182,60 @@ Funcion EjecutarTandaPenales(modo_de_juego)
         CentrarTexto(">>> PATEA "+ nombre_j1+ " <<<")
         Repetir
             CentrarTexto("Elige una zona para disparar (1-9) o (0 para salir):")
-            Leer tiro
-        Hasta Que tiro >= 0 Y tiro <= 9
+			//
+            Leer tiro_texto
+			
+			Si (tiro_texto <> "0" Y tiro_texto <> "1" Y tiro_texto <> "2" Y tiro_texto <> "3" Y tiro_texto <> "4" Y tiro_texto <> "5" Y tiro_texto <> "6" Y tiro_texto <> "7" Y tiro_texto <> "8" Y tiro_texto <> "9") Entonces
+                CentrarTexto("Opción no válida : Debes ingresar un NÚMERO entre 0 y 9.")
+                Esperar 1.5 Segundos
+                Limpiar Pantalla // borramos
+                Para i<-1 Hasta 5 Con Paso 1 Hacer
+                    Escribir ""
+                Fin Para
+                CentrarTexto("****************************************************")
+                CentrarTexto("RONDA "+ ConvertirATexto(ronda)+ " de 5")
+                CentrarTexto("MARCADOR: "+ nombre_j1+ " "+ ConvertirATexto(goles_j1)+ " - "+ nombre_j2+ " "+ ConvertirATexto(goles_j2))
+                CentrarTexto("****************************************************")
+                Escribir ""
+                CentrarTexto(">>> PATEA "+ nombre_j1+ " <<<")
+            FinSi
+			
+        Hasta Que (tiro_texto = "0" O tiro_texto = "1" O tiro_texto = "2" O tiro_texto = "3" O tiro_texto = "4" O tiro_texto = "5" O tiro_texto = "6" O tiro_texto = "7" O tiro_texto = "8" O tiro_texto = "9")
+		tiro <- ConvertirANumero(tiro_texto)
 		
         Si tiro = 0 Entonces
             partida_abandonada <- Verdadero
         Sino
             CentrarTexto(">>> ATAJA "+ nombre_j2+ " <<<")
-            Si modo_de_juego = 1 Entonces
-                atajada <- Azar(9) + 1
-                CentrarTexto("La Máquina elige su posición...")
-                Esperar 1 Segundos
-            Sino
-                Repetir
-                    CentrarTexto("Elige una zona para atajar (1-9):")
-                    Leer atajada
-                Hasta Que atajada >= 1 Y atajada <= 9
-            FinSi
+			Si modo_de_juego = 1 Entonces // 
+				Segun dificultad Hacer
+					1: // Fácil
+						CentrarTexto("La Máquina (Novato) elige su posición...")
+						Si Azar(10) < 7 Entonces // 70% de probabilidad de errar
+							Repetir
+								atajada <- Azar(9) + 1
+							Hasta Que atajada <> tiro // Elige un lugar que NO sea el tuyo
+						Sino
+							atajada <- Azar(9) + 1; // 30% de un tiro al azar normal
+						FinSi
+					2: // Intermedio
+						CentrarTexto("La Máquina elige su posición...");
+						atajada <- Azar(9) + 1 // 100% al azar, como estaba antes
+					3: // Difícil
+						CentrarTexto("La Máquina (Pro) elige su posición...")
+						Si Azar(10) < 4 Entonces // 40% de probabilidad de "adivinar" tu tiro
+							atajada <- tiro // 
+						Sino
+							atajada <- Azar(9) + 1 // 60% de un tiro al azar normal
+						FinSi
+				FinSegun
+				Esperar 1 Segundos
+			Sino // Si es modo 2 (jugador)
+				Repetir
+					CentrarTexto("Elige una zona para atajar (1-9):")
+					Leer atajada
+				Hasta Que atajada >= 1 Y atajada <= 9
+			FinSi
 			
             Si tiro <> atajada Entonces
                 goles_j1 <- goles_j1 + 1
@@ -233,9 +271,27 @@ Funcion EjecutarTandaPenales(modo_de_juego)
                 CentrarTexto(">>> ATAJA " + nombre_j1 + " <<<")
                 Repetir
                     CentrarTexto("Elige una zona para atajar (1-9) o (0 para salir):")
-                    Leer atajada
-                Hasta Que atajada >= 0 Y atajada <= 9
+					Leer atajada_texto
+                    //Leer atajada
+					Si (atajada_texto <> "0" Y atajada_texto <> "1" Y atajada_texto <> "2" Y atajada_texto <> "3" Y atajada_texto <> "4" Y atajada_texto <> "5" Y atajada_texto <> "6" Y atajada_texto <> "7" Y atajada_texto <> "8" Y atajada_texto <> "9") Entonces
+						CentrarTexto("Error: Debes ingresar un NÚMERO entre 0 y 9.")
+						Esperar 1.5 Segundos
+						Limpiar Pantalla // Volvemos a dibujar la pantalla
+						Para i <-1 Hasta 5 Con Paso 1 Hacer
+							Escribir " "
+						Fin Para
+						CentrarTexto("****************************************************")
+						CentrarTexto("RONDA " + ConvertirATexto(ronda) + " de 5")
+						CentrarTexto("MARCADOR: "+ nombre_j1+ " "+ ConvertirATexto(goles_j1)+ " - "+ nombre_j2+ " "+ ConvertirATexto(goles_j2))
+						CentrarTexto("****************************************************")
+						Escribir ""
+						CentrarTexto(">>> PATEA " + nombre_j2 + " <<<")
+						CentrarTexto(">>> ATAJA " + nombre_j1 + " <<<")
+					FinSi
+                Hasta Que (atajada_texto = "0" O atajada_texto = "1" O atajada_texto = "2" O atajada_texto = "3" O atajada_texto = "4" O atajada_texto = "5" O atajada_texto = "6" O atajada_texto = "7" O atajada_texto = "8" O atajada_texto = "9")
                 
+				atajada <- ConvertirANumero(atajada_texto)
+				
                 Si atajada = 0 Entonces
                     partida_abandonada <- Verdadero
                 Sino
@@ -254,14 +310,14 @@ Funcion EjecutarTandaPenales(modo_de_juego)
 	
     Limpiar Pantalla
     Si partida_abandonada Entonces
-		Para i<-1 Hasta 5 Con Paso paso Hacer
+		Para i<-1 Hasta 5 Con Paso 1 Hacer
 			Escribir ""
 		Fin Para
         CentrarTexto("=============================================")
         CentrarTexto("||       HAS ABANDONADO LA PARTIDA         ||")
         CentrarTexto("=============================================")
     Sino
-		Para i<-1 Hasta 5 Con Paso paso Hacer
+		Para i<-1 Hasta 5 Con Paso 1 Hacer
 			Escribir ""
 		Fin Para
         CentrarTexto("=============================================")
@@ -291,7 +347,7 @@ Funcion EjecutarModoApuestas(dummy)
 	Definir puntos_j1, puntos_j2, ronda, apuesta_j1, apuesta_j2, tiro_cpu, atajada_cpu Como Entero
 	Definir VALOR_APUESTA Como Entero
 	Definir resultado_fue_gol Como Entero
-	//Definir nombre_j1, nombre_j2 Como Caracter
+	Definir nombre_j1, nombre_j2,apuesta_j1_texto, apuesta_j2_texto Como Caracter
 	Definir i Como Entero
 	//PEDIR NOMBRES
 	Limpiar Pantalla
@@ -325,24 +381,26 @@ Funcion EjecutarModoApuestas(dummy)
 	CentrarTexto(">>> TURNO DE APUESTA: "+ nombre_j1+" <<<")
 	Repetir
 		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
-		Leer apuesta_j1
-		Si apuesta_j1 <> 1 Y apuesta_j1 <> 2 Entonces
-			CentrarTexto("Opción inválida. Elige 1 o 2.");
-			Esperar 1 Segundos;
+		Leer apuesta_j1_texto
+
+		Si apuesta_j1_texto <> "1" Y apuesta_j1_texto <> "2" Entonces
+			CentrarTexto("Opción inválida. Elige 1 o 2.")
+			Esperar 1 Segundos
 			// Volver a dibujar la pantalla para que se vea limpia
 			Limpiar Pantalla;
 			Para i <- 1 Hasta 5 Hacer
-				Escribir "";
+				Escribir ""
 			FinPara
-			CentrarTexto("****************************************************");
-			CentrarTexto("RONDA DE APUESTAS " + ConvertirATexto(ronda) + " de 5");
-			CentrarTexto("PUNTAJE: "+ nombre_j1+" [" + ConvertirATexto(puntos_j1) + "] - "+nombre_j2+" [" + ConvertirATexto(puntos_j2) + "]");
-			CentrarTexto("****************************************************");
-			Escribir "";
-			CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j1+" <<<");
+			CentrarTexto("****************************************************")
+			CentrarTexto("RONDA DE APUESTAS " + ConvertirATexto(ronda) + " de 5")
+			CentrarTexto("PUNTAJE: "+ nombre_j1+" [" + ConvertirATexto(puntos_j1) + "] - "+nombre_j2+" [" + ConvertirATexto(puntos_j2) + "]")
+			CentrarTexto("****************************************************")
+			Escribir ""
+			CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j1+" <<<")
 		FinSi
-	Hasta Que apuesta_j1 = 1 O apuesta_j1 = 2;
-	Limpiar Pantalla; // Oculta la apuesta del J1
+	Hasta Que apuesta_j1_texto = "1" O apuesta_j1_texto = "2"
+	apuesta_j1 <- ConvertirANumero(apuesta_j1_texto)
+	Limpiar Pantalla // Oculta la apuesta del J1
 	
 	// APUESTA JUGADOR 2
 	Para i <- 1 Hasta 5 Hacer
@@ -356,8 +414,8 @@ Funcion EjecutarModoApuestas(dummy)
 	CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j2+" <<<")
 	Repetir
 		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
-		Leer apuesta_j2
-		Si apuesta_j2 <> 1 Y apuesta_j2 <> 2 Entonces
+		Leer apuesta_j2_texto
+		Si apuesta_j2_texto <> "1" Y apuesta_j2_texto <> "2" Entonces
 			CentrarTexto("Opción inválida. Elige 1 o 2.")
 			Esperar 1 Segundos
 			// Volver a dibujar la pantalla para que se vea limpia
@@ -372,8 +430,8 @@ Funcion EjecutarModoApuestas(dummy)
 			Escribir ""
 			CentrarTexto(">>> TURNO DE APUESTA: "+ nombre_j2+" <<<")
 		FinSi
-	Hasta Que apuesta_j2 = 1 O apuesta_j2 = 2
-	
+	Hasta Que apuesta_j2_texto = "1" O apuesta_j2_texto = "2"
+	apuesta_j2 <- ConvertirANumero(apuesta_j2_texto)
 	Escribir ""
 	CentrarTexto("Ambas apuestas registradas. ¡Veamos el penal!")
 	Esperar 2 Segundos
@@ -387,7 +445,7 @@ Funcion EjecutarModoApuestas(dummy)
 		resultado_fue_gol <- 0 // No hizo gol, fue atajada
 	FinSi
 	
-	DibujarResultado(tiro_cpu, atajada_cpu, resultado_fue_gol)
+	DibujarResultado(tiro_cpu, atajada_cpu, resultado_fue_gol =1)
 	
 	// PAGO DE APUESTAS
 	Si (resultado_fue_gol = 1 Y apuesta_j1 = 1) O (resultado_fue_gol = 0 Y apuesta_j1 = 2) Entonces
@@ -411,13 +469,38 @@ Funcion EjecutarModoApuestas(dummy)
 	CentrarTexto("Presiona Enter para la siguiente ronda...")
 	Esperar Tecla
 	FinMientras
-
+	
+	Limpiar Pantalla
+	Para i<-1 Hasta 5 Hacer
+		Escribir ""
+	FinPara
+	CentrarTexto("=============================================")
+	CentrarTexto("||        FIN DEL JUEGO DE APUESTAS        ||")
+	CentrarTexto("=============================================")
+	CentrarTexto("Puntaje final:")
+	CentrarTexto(nombre_j1 + ": " + ConvertirATexto(puntos_j1) + " puntos.")
+	CentrarTexto(nombre_j2 + ": " + ConvertirATexto(puntos_j2) + " puntos.")
+	Escribir ""
+	Si puntos_j1 > puntos_j2 Entonces
+		CentrarTexto("¡¡¡ GANA " + nombre_j1 + " !!!")
+	Sino Si puntos_j2 > puntos_j1 Entonces
+			CentrarTexto("¡¡¡ GANA " + nombre_j2 + " !!!")
+		Sino
+			CentrarTexto("¡El resultado es un EMPATE!")
+		FinSi
+		
+	FinSi
+	
+	Escribir ""
+	CentrarTexto("Presiona Enter para volver al menú principal...")
+	Esperar Tecla
 FinFuncion
 // =============================================================================
-// FUNCIÓN #3: MUESTRA EL MENÚ DEL JUEGO DE PENALES
+// FUNCIÓN #4: MUESTRA EL MENÚ DEL JUEGO DE PENALES
 // =============================================================================
 Funcion MenuPenales(dummy)
-    Definir opcion_menu, i Como Entero
+    Definir i,dificultad_elegida Como Entero
+	Definir opcion_menu como Cadena
     Repetir
         Limpiar Pantalla
 		
@@ -437,21 +520,22 @@ Funcion MenuPenales(dummy)
         Leer opcion_menu
 		
         Segun opcion_menu Hacer
-            1:
-                EjecutarTandaPenales(1)
-            2:
+            "1":
+				dificultad_elegida <- MenuDificultad(0)
+				EjecutarTandaPenales(1, dificultad_elegida)
+            "2":
                 EjecutarModoApuestas(0)
-            3:
+            "3":
                 // No hace nada
             De Otro Modo:
                 Escribir "Opción no válida."
                 Esperar 1 Segundos
         FinSegun
-    Hasta Que opcion_menu = 3
+    Hasta Que opcion_menu = "3"
 Fin Funcion
 
 // =============================================================================
-// FUNCIÓN #4: AUXILIAR PARA CENTRAR TEXTO EN LA PANTALLA
+// FUNCIÓN #5: AUXILIAR PARA CENTRAR TEXTO EN LA PANTALLA
 // =============================================================================
 Funcion CentrarTexto(texto_a_centrar)
     // Asumimos un ancho de pantalla estándar de 80 caracteres
@@ -472,7 +556,7 @@ Funcion CentrarTexto(texto_a_centrar)
     Escribir margen, texto_a_centrar
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #4: PARA CENTRAR LEER OPCION
+// FUNCIÓN #6: PARA CENTRAR LEER OPCION
 // =============================================================================
 Funcion   LeerCentrado(opc Por Referencia)
     Definir ancho_consola, espacios, i Como Entero
@@ -489,7 +573,7 @@ Funcion   LeerCentrado(opc Por Referencia)
 FinFuncion
 
 // =============================================================================
-// FUNCIÓN #5: INSERTAR NUMERO VALIDO
+// FUNCIÓN #7: INSERTAR NUMERO VALIDO
 // =============================================================================
 Funcion ObtenerDigitoValido(dummy)
     Definir entrada Como Cadena
@@ -508,12 +592,44 @@ Funcion ObtenerDigitoValido(dummy)
 		FinSi
 	FinMientras
 FinFuncion
-
+// =============================================================================
+// FUNCIÓN #8: SELECCION DE DIFICULTAD
+// =============================================================================
+Funcion dificultad <- MenuDificultad(dummy)
+    Definir opcion_dificultad, i Como Entero
+	Definir opcion_dificultad_texto Como Cadena // esto lo hacemos a prueba de errores del usuario
+	
+    Repetir
+        Limpiar Pantalla
+        Para i <- 1 Hasta 5 Hacer
+            Escribir ""
+        FinPara
+        
+        CentrarTexto("*********************************")
+        CentrarTexto("*    SELECCIONA LA DIFICULTAD   *")
+        CentrarTexto("*********************************")
+        CentrarTexto("* 1. Fácil (Arquero novato)     *")
+        CentrarTexto("* 2. Intermedio (Suerte pura)   *")
+        CentrarTexto("* 3. Difícil (Arquero pro)      *")
+        CentrarTexto("*********************************")
+        Leer opcion_dificultad_texto
+        //leemos todo en texto 
+		Si opcion_dificultad_texto <> "1" Y opcion_dificultad_texto <> "2" Y opcion_dificultad_texto <> "3" Entonces
+            CentrarTexto("Opción no válida. Elige 1, 2 o 3.")
+            Esperar 1.5 Segundos
+        FinSi
+		
+	Hasta Que opcion_dificultad_texto = "1" O opcion_dificultad_texto = "2" O opcion_dificultad_texto = "3"
+	//elige la opción correcta y lo pasamos a numero y se lo asignamos a dificultad
+	opcion_dificultad <- ConvertirANumero(opcion_dificultad_texto)
+    dificultad <- opcion_dificultad
+Fin Funcion
 // =============================================================================
 // ALGORITMO PRINCIPAL - MENÚ DEL VIDEOJUEGO
 // =============================================================================
-Algoritmo VideojuegoUTN
-    Definir opcion Como Entero
+Algoritmo Golazo
+	Definir opcion_texto Como Cadena  // leemos todo en formato texto, es la mejor para evitar que el programa crashee, si el usuario coloca una letra en ves de numero.
+    Definir i Como Entero             
     Repetir
 		Limpiar Pantalla
 		
@@ -527,7 +643,7 @@ Algoritmo VideojuegoUTN
         // Con esta función centramos cada línea del menú
         CentrarTexto("*********************************************")
         CentrarTexto("* *")
-        CentrarTexto("*           SALA DE JUEGOS - UTN            *")
+        CentrarTexto("*                  GOLAZO!                  *")
         CentrarTexto("* *")
         CentrarTexto("*********************************************")
         CentrarTexto("* *")
@@ -539,22 +655,24 @@ Algoritmo VideojuegoUTN
         Escribir "" // Un espacio extra antes de la petición de entrada
         CentrarTexto(" Seleccione una opción y presione Enter:      ")
         
-		Leer opcion
+		Leer opcion_texto
         // La lectura de la opción la dejamos sin centrar para que el cursor quede a la izquierda
-        //Leer opcion;
 		
-        Segun opcion Hacer
-            1:
+        Segun opcion_texto Hacer
+            "1":
                 MenuPenales(0)
-            2:
+            "2":
                 Limpiar Pantalla
-                Escribir "El juego de Tenis está en desarrollo :O. ¡Vuelve pronto!"
+				CentrarTexto("El juego de Tenis está en desarrollo :O. ¡Vuelve pronto!")
+                //Escribir "El juego de Tenis está en desarrollo :O. ¡Vuelve pronto!"
                 Esperar 2 Segundos
-            3:
-                Escribir "¡Gracias por jugar!"
+            "3":
+				CentrarTexto("¡Gracias por jugar!")
+                //Escribir "¡Gracias por jugar!"
             De Otro Modo:
-                Escribir "Opción no válida."
+				CentrarTexto("Opción no válida.")
+                //Escribir "Opción no válida."
                 Esperar 1 Segundos
         FinSegun
-    Hasta Que opcion = 3
+    Hasta Que opcion_texto = "3"
 FinAlgoritmo
