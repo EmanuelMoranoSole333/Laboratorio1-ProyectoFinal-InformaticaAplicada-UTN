@@ -127,7 +127,7 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
     Si esGol Entonces
         CentrarTexto("¡¡¡ G O O O O O L !!!")
     Sino
-        CentrarTexto("¡¡¡ ATAJÓ EL ARQUERO !!!")
+        CentrarTexto("¡¡¡ ATAJO EL ARQUERO !!!")
     FinSi
 	
     Escribir ""
@@ -156,7 +156,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
 	Leer nombre_j1
 	
     Si modo_de_juego = 1 Entonces
-        nombre_j2 <- "Máquina"
+        nombre_j2 <- "Maquina"
     Sino
         CentrarTexto("Ingrese el nombre del Jugador 2:")
 		Leer nombre_j2
@@ -186,7 +186,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
             Leer tiro_texto
 			
 			Si (tiro_texto <> "0" Y tiro_texto <> "1" Y tiro_texto <> "2" Y tiro_texto <> "3" Y tiro_texto <> "4" Y tiro_texto <> "5" Y tiro_texto <> "6" Y tiro_texto <> "7" Y tiro_texto <> "8" Y tiro_texto <> "9") Entonces
-                CentrarTexto("Opción no válida : Debes ingresar un NÚMERO entre 0 y 9.")
+                CentrarTexto("Opcion no valida : Debes ingresar un NUMERO entre 0 y 9.")
                 Esperar 1.5 Segundos
                 Limpiar Pantalla // borramos
                 Para i<-1 Hasta 5 Con Paso 1 Hacer
@@ -210,7 +210,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
 			Si modo_de_juego = 1 Entonces // 
 				Segun dificultad Hacer
 					1: // Fácil
-						CentrarTexto("La Máquina (Novato) elige su posición...")
+						CentrarTexto("La Maquina (Novato) elige su posicion...")
 						Si Azar(10) < 7 Entonces // 70% de probabilidad de errar
 							Repetir
 								atajada <- Azar(9) + 1
@@ -219,10 +219,10 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
 							atajada <- Azar(9) + 1; // 30% de un tiro al azar normal
 						FinSi
 					2: // Intermedio
-						CentrarTexto("La Máquina elige su posición...");
+						CentrarTexto("La Maquina elige su posicion...");
 						atajada <- Azar(9) + 1 // 100% al azar, como estaba antes
 					3: // Difícil
-						CentrarTexto("La Máquina (Pro) elige su posición...")
+						CentrarTexto("La Maquina (Pro) elige su posicion...")
 						Si Azar(10) < 4 Entonces // 40% de probabilidad de "adivinar" tu tiro
 							atajada <- tiro // 
 						Sino
@@ -259,7 +259,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
                 CentrarTexto(">>> PATEA " + nombre_j2 + " <<<")
                 Si modo_de_juego = 1 Entonces
                     tiro <- Azar(9) + 1
-                    CentrarTexto("La Máquina elige su disparo...")
+                    CentrarTexto("La Maquina elige su disparo...")
                     Esperar 1 Segundos
                 Sino
                     Repetir
@@ -274,7 +274,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
 					Leer atajada_texto
                     //Leer atajada
 					Si (atajada_texto <> "0" Y atajada_texto <> "1" Y atajada_texto <> "2" Y atajada_texto <> "3" Y atajada_texto <> "4" Y atajada_texto <> "5" Y atajada_texto <> "6" Y atajada_texto <> "7" Y atajada_texto <> "8" Y atajada_texto <> "9") Entonces
-						CentrarTexto("Error: Debes ingresar un NÚMERO entre 0 y 9.")
+						CentrarTexto("Error: Debes ingresar un NUMERO entre 0 y 9.")
 						Esperar 1.5 Segundos
 						Limpiar Pantalla // Volvemos a dibujar la pantalla
 						Para i <-1 Hasta 5 Con Paso 1 Hacer
@@ -380,11 +380,11 @@ Funcion EjecutarModoApuestas(dummy)
 	// APUESTA JUGADOR 1
 	CentrarTexto(">>> TURNO DE APUESTA: "+ nombre_j1+" <<<")
 	Repetir
-		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
+		CentrarTexto("¿Que crees que pasara? (1: GOL, 2: ATAJADA)")
 		Leer apuesta_j1_texto
 
 		Si apuesta_j1_texto <> "1" Y apuesta_j1_texto <> "2" Entonces
-			CentrarTexto("Opción inválida. Elige 1 o 2.")
+			CentrarTexto("Opcion invalida. Elige 1 o 2.")
 			Esperar 1 Segundos
 			// Volver a dibujar la pantalla para que se vea limpia
 			Limpiar Pantalla;
@@ -413,10 +413,10 @@ Funcion EjecutarModoApuestas(dummy)
 	Escribir ""
 	CentrarTexto(">>> TURNO DE APUESTA: "+nombre_j2+" <<<")
 	Repetir
-		CentrarTexto("¿Qué crees que pasará? (1: GOL, 2: ATAJADA)")
+		CentrarTexto("¿Que crees que pasara? (1: GOL, 2: ATAJADA)")
 		Leer apuesta_j2_texto
 		Si apuesta_j2_texto <> "1" Y apuesta_j2_texto <> "2" Entonces
-			CentrarTexto("Opción inválida. Elige 1 o 2.")
+			CentrarTexto("Opcion invalida. Elige 1 o 2.")
 			Esperar 1 Segundos
 			// Volver a dibujar la pantalla para que se vea limpia
 			Limpiar Pantalla
@@ -492,7 +492,7 @@ Funcion EjecutarModoApuestas(dummy)
 	FinSi
 	
 	Escribir ""
-	CentrarTexto("Presiona Enter para volver al menú principal...")
+	CentrarTexto("Presiona Enter para volver al menu principal...")
 	Esperar Tecla
 FinFuncion
 // =============================================================================
@@ -513,9 +513,9 @@ Funcion MenuPenales(dummy)
         CentrarTexto( "*********************************" )
         CentrarTexto( "*     MODOS DE JUEGO PENALES    *" )
         CentrarTexto( "*********************************" )
-        CentrarTexto( "* 1. Jugador vs. Máquina        *" )
+        CentrarTexto( "* 1. Jugador vs. Maquina        *" )
         CentrarTexto( "* 2. Modo Apuestas (2 Jugadores)*" )
-        CentrarTexto( "* 3. Volver al menú principal   *" )
+        CentrarTexto( "* 3. Volver al menu principal   *" )
         CentrarTexto( "*********************************" )
         Leer opcion_menu
 		
@@ -528,7 +528,7 @@ Funcion MenuPenales(dummy)
             "3":
                 // No hace nada
             De Otro Modo:
-                Escribir "Opción no válida."
+                Escribir "Opcion no valida."
                 Esperar 1 Segundos
         FinSegun
     Hasta Que opcion_menu = "3"
@@ -540,7 +540,7 @@ Fin Funcion
 Funcion CentrarTexto(texto_a_centrar)
     // Asumimos un ancho de pantalla estándar de 80 caracteres
     Definir ANCHO_PANTALLA Como Entero
-    ANCHO_PANTALLA <- 130
+    ANCHO_PANTALLA <- 135
 	
     Definir largo_texto, espacios_margen, i Como Entero
     Definir margen Como Caracter
@@ -581,14 +581,14 @@ Funcion ObtenerDigitoValido(dummy)
 	
     Mientras Verdadero Hacer
         Escribir ""
-        Escribir "Elegí una posición (0-9):"
+        Escribir "Elegi una posicion (0-9):"
         Leer entrada
 		
         Si Longitud(entrada) = 1 Y (entrada >= "0" Y entrada <= "9") Entonces
             digito <- ConvertirANumero(entrada)
             DigitoValido <- digito   // << esto devuelve el valor
 		SiNo
-			Escribir "Entrada inválida. Debes ingresar un número del 0 al 9."
+			Escribir "Entrada invalida. Debes ingresar un numero del 0 al 9."
 		FinSi
 	FinMientras
 FinFuncion
@@ -608,14 +608,14 @@ Funcion dificultad <- MenuDificultad(dummy)
         CentrarTexto("*********************************")
         CentrarTexto("*    SELECCIONA LA DIFICULTAD   *")
         CentrarTexto("*********************************")
-        CentrarTexto("* 1. Fácil (Arquero novato)     *")
+        CentrarTexto("* 1. Facil (Arquero novato)     *")
         CentrarTexto("* 2. Intermedio (Suerte pura)   *")
-        CentrarTexto("* 3. Difícil (Arquero pro)      *")
+        CentrarTexto("* 3. Dificil (Arquero pro)      *")
         CentrarTexto("*********************************")
         Leer opcion_dificultad_texto
         //leemos todo en texto 
 		Si opcion_dificultad_texto <> "1" Y opcion_dificultad_texto <> "2" Y opcion_dificultad_texto <> "3" Entonces
-            CentrarTexto("Opción no válida. Elige 1, 2 o 3.")
+            CentrarTexto("Opcion no valida. Elige 1, 2 o 3.")
             Esperar 1.5 Segundos
         FinSi
 		
@@ -648,12 +648,12 @@ Algoritmo Golazo
         CentrarTexto("*********************************************")
         CentrarTexto("* *")
         CentrarTexto("* 1. Jugar Tanda de Penales                 *")
-        CentrarTexto("* 2. Jugar Tenis (Próximamente)             *")
+        CentrarTexto("* 2. Jugar Tenis (Proximamente)             *")
         CentrarTexto("* 3. Salir del Juego                        *")
         CentrarTexto("* *")
         CentrarTexto("*********************************************")
         Escribir "" // Un espacio extra antes de la petición de entrada
-        CentrarTexto(" Seleccione una opción y presione Enter:      ")
+        CentrarTexto(" Seleccione una opcion y presione Enter:     ")
         
 		Leer opcion_texto
         // La lectura de la opción la dejamos sin centrar para que el cursor quede a la izquierda
@@ -663,14 +663,14 @@ Algoritmo Golazo
                 MenuPenales(0)
             "2":
                 Limpiar Pantalla
-				CentrarTexto("El juego de Tenis está en desarrollo :O. ¡Vuelve pronto!")
+				CentrarTexto("El juego de Tenis esta en desarrollo :O. ¡Vuelve pronto!")
                 //Escribir "El juego de Tenis está en desarrollo :O. ¡Vuelve pronto!"
                 Esperar 2 Segundos
             "3":
 				CentrarTexto("¡Gracias por jugar!")
                 //Escribir "¡Gracias por jugar!"
             De Otro Modo:
-				CentrarTexto("Opción no válida.")
+				CentrarTexto("Opcion no valida.")
                 //Escribir "Opción no válida."
                 Esperar 1 Segundos
         FinSegun
