@@ -601,7 +601,7 @@ FinFuncion
 // =============================================================================
 Funcion MenuPenales(dummy)
     Definir i,dificultad_elegida Como Entero
-	Definir opcion_menu como Cadena
+	Definir opcion_menu como Caracter
     Repetir
         Limpiar Pantalla
         CentradoVertical(5)
@@ -681,7 +681,7 @@ FinFuncion
 // FUNCIÓN #7: INSERTAR NUMERO VALIDO
 // =============================================================================
 Funcion ObtenerDigitoValido(dummy)
-    Definir entrada Como Cadena
+    Definir entrada Como Caracter
     Definir digito, DigitoValido Como Entero
 	
     Mientras Verdadero Hacer
