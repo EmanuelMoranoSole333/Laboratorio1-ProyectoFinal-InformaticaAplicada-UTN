@@ -121,9 +121,9 @@ Funcion DibujarResultado(posicion_tiro, posicion_atajada, esGol)
 	CentrarTexto("")
 
     Si esGol Entonces
-        CentrarTexto("¡¡¡ G O O O O O L !!!")
+        CentrarTexto(" G O O O O O L !!!")
     Sino
-        CentrarTexto("¡¡¡ ATAJO EL ARQUERO !!!")
+        CentrarTexto(" ATAJO EL ARQUERO !!!")
     FinSi
 	
     Escribir ""
