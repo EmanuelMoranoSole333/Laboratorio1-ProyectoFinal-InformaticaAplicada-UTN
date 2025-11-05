@@ -384,7 +384,7 @@ Fin Funcion
 // =============================================================================
 // FUNCIÓN #3: MODO APUESTAS
 // =============================================================================
-Funcion EjecutarModoApuestas(dummy)
+Funcion EjecutarModoApuestas(0)
 	Definir puntos_j1, puntos_j2, ronda, apuesta_j1, apuesta_j2, tiro_cpu, atajada_cpu Como Entero
 	Definir VALOR_APUESTA Como Entero
 	Definir resultado_fue_gol Como Entero
@@ -599,7 +599,7 @@ FinFuncion
 // =============================================================================
 // FUNCIÓN #4: MUESTRA EL MENÚ DEL JUEGO DE PENALES
 // =============================================================================
-Funcion MenuPenales(dummy)
+Funcion MenuPenales(0)
     Definir i,dificultad_elegida Como Entero
 	Definir opcion_menu como Caracter
     Repetir
@@ -680,7 +680,7 @@ FinFuncion
 // =============================================================================
 // FUNCIÓN #7: INSERTAR NUMERO VALIDO
 // =============================================================================
-Funcion ObtenerDigitoValido(dummy)
+Funcion ObtenerDigitoValido(0)
     Definir entrada Como Caracter
     Definir digito, DigitoValido Como Entero
 	
@@ -700,7 +700,7 @@ FinFuncion
 // =============================================================================
 // FUNCIÓN #8: SELECCION DE DIFICULTAD
 // =============================================================================
-Funcion dificultad <- MenuDificultad(dummy)
+Funcion dificultad <- MenuDificultad(0)
     Definir opcion_dificultad, i Como Entero
 	Definir opcion_dificultad_texto Como Caracter // esto lo hacemos a prueba de errores del usuario
 	
@@ -744,7 +744,7 @@ Fin Funcion
 // =============================================================================
 // FUNCIÓN #9: COMIENZO GOLAZO!
 // =============================================================================
-Funcion AnimacionInicio(dummy)
+Funcion AnimacionInicio(0)
 	Definir i, j Como Entero
 	//FRAME 1
 	Limpiar Pantalla
@@ -1156,7 +1156,7 @@ Algoritmo Golazo
 	Definir opcion_texto Como Cadena  // leemos todo en formato texto, es la mejor para evitar que el programa crashee, si el usuario coloca una letra en ves de numero.
     Definir i Como Entero
 	//Comienzo
-	AnimacionInicio(dummy)
+	AnimacionInicio(0)
 	//Menu
     Repetir
 		Limpiar Pantalla
