@@ -241,7 +241,7 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
             CentrarTexto("       >>> ATAJA "+ nombre_j2+ " <<<")
 			Si modo_de_juego = 1 Entonces 
                 Segun dificultad Hacer
-                    1: // Fácil
+                    1: // Facil
                         CentrarTexto("     La Maquina (Novato) elige su posicion...")
                         Si Azar(10) < 7 Entonces 
                             Repetir
@@ -253,18 +253,18 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
                         
                     2: // Intermedio
                         CentrarTexto("     La Maquina (Intermedio) elige un sector...")
-                        sector_elegido <- Azar(3) + 1 // 1=Izq, 2=Centro, 3=Der
+                        sector_elegido <- Azar(3) + 1 // 1=Izq, 2=Centro, 3=Derecha
                         
-                        atajada <- 0 // Valor temporal
+                        atajada <- 0 
                         
                         Si sector_elegido = 1 Y (tiro = 1 O tiro = 4 O tiro = 7) Entonces // Sector Izq
-                            atajada <- tiro // ATAJADA!
+                            atajada <- tiro // ataja
                         FinSi
                         Si sector_elegido = 2 Y (tiro = 2 O tiro = 5 O tiro = 8) Entonces // Sector Centro
-                            atajada <- tiro // ATAJADA!
+                            atajada <- tiro // ataja
                         FinSi
                         Si sector_elegido = 3 Y (tiro = 3 O tiro = 6 O tiro = 9) Entonces // Sector Der
-                            atajada <- tiro // ATAJADA!
+                            atajada <- tiro // ataja
                         FinSi
                         
                         //
