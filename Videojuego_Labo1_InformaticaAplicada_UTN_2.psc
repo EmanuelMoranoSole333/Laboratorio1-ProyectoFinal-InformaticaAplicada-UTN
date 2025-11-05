@@ -239,35 +239,78 @@ Funcion EjecutarTandaPenales(modo_de_juego, dificultad)
             partida_abandonada <- Verdadero
         Sino
             CentrarTexto("       >>> ATAJA "+ nombre_j2+ " <<<")
-			Si modo_de_juego = 1 Entonces // 
-				Segun dificultad Hacer
-					1: // Fácil
-						CentrarTexto("       La Maquina (Novato) elige su posicion...")
-						Si Azar(10) < 7 Entonces // 70% de probabilidad de errar
-							Repetir
-								atajada <- Azar(9) + 1
-							Hasta Que atajada <> tiro // Elige un lugar que NO sea el tuyo
-						Sino
-							atajada <- Azar(9) + 1; // 30% de un tiro al azar normal
-						FinSi
-					2: // Intermedio
-						CentrarTexto("       La Maquina elige su posicion...");
-						atajada <- Azar(9) + 1 // 100% al azar, como estaba antes
-					3: // Difícil
-						CentrarTexto("       La Maquina (Pro) elige su posicion...")
-						Si Azar(10) < 4 Entonces // 40% de probabilidad de "adivinar" tu tiro
-							atajada <- tiro // 
-						Sino
-							atajada <- Azar(9) + 1 // 60% de un tiro al azar normal
-						FinSi
-				FinSegun
-				Esperar 1 Segundos
-			Sino // Si es modo 2 (jugador)
-				Repetir
-					CentrarTexto("       Elige una zona para atajar (1-9):")
-					Leer atajada
-				Hasta Que atajada >= 1 Y atajada <= 9
-			FinSi
+			Si modo_de_juego = 1 Entonces 
+                Segun dificultad Hacer
+                    1: // Fácil
+                        CentrarTexto("     La Maquina (Novato) elige su posicion...")
+                        Si Azar(10) < 7 Entonces 
+                            Repetir
+                                atajada <- Azar(9) + 1
+                            Hasta Que atajada <> tiro 
+                        Sino
+                            atajada <- Azar(9) + 1; 
+                        FinSi
+                        
+                    2: // Intermedio
+                        CentrarTexto("     La Maquina (Intermedio) elige un sector...")
+                        sector_elegido <- Azar(3) + 1 // 1=Izq, 2=Centro, 3=Der
+                        
+                        atajada <- 0 // Valor temporal
+                        
+                        Si sector_elegido = 1 Y (tiro = 1 O tiro = 4 O tiro = 7) Entonces // Sector Izq
+                            atajada <- tiro // ATAJADA!
+                        FinSi
+                        Si sector_elegido = 2 Y (tiro = 2 O tiro = 5 O tiro = 8) Entonces // Sector Centro
+                            atajada <- tiro // ATAJADA!
+                        FinSi
+                        Si sector_elegido = 3 Y (tiro = 3 O tiro = 6 O tiro = 9) Entonces // Sector Der
+                            atajada <- tiro // ATAJADA!
+                        FinSi
+                        
+                        //
+                        Si atajada = 0 Entonces
+                            Segun sector_elegido
+                                1: atajada <- 4 // Se tira a la izquierda
+                                2: atajada <- 5 // Se tira al centro
+                                3: atajada <- 6 // Se tira a la derecha
+                            FinSegun
+                        FinSi
+						
+                    3: // Difícil
+                        CentrarTexto("     La Maquina (Pro) elige su posicion...")
+                        Si Azar(10) < 4 Entonces //
+                            atajada <- tiro 
+                        Sino 
+                            // 
+                            sector_elegido <- Azar(3) + 1 
+                            atajada <- 0 
+                            
+                            Si sector_elegido = 1 Y (tiro = 1 O tiro = 4 O tiro = 7) Entonces 
+                                atajada <- tiro
+                            FinSi
+                            Si sector_elegido = 2 Y (tiro = 2 O tiro = 5 O tiro = 8) Entonces 
+                                atajada <- tiro
+                            FinSi
+                            Si sector_elegido = 3 Y (tiro = 3 O tiro = 6 O tiro = 9) Entonces 
+                                atajada <- tiro
+                            FinSi
+                            
+                            Si atajada = 0 Entonces
+                                Segun sector_elegido
+                                    1: atajada <- 4 
+                                    2: atajada <- 5
+                                    3: atajada <- 6
+                                FinSegun
+                            FinSi
+                        FinSi
+                FinSegun
+                Esperar 1 Segundos
+            Sino 
+                Repetir
+                    CentrarTexto("     Elige una zona para atajar (1-9):")
+                    Leer atajada
+                Hasta Que atajada >= 1 Y atajada <= 9
+            FinSi
 			
             Si tiro <> atajada Entonces
                 goles_j1 <- goles_j1 + 1
@@ -661,24 +704,7 @@ Funcion CentrarTexto(texto_a_centrar)
     Escribir margen, texto_a_centrar
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #6: PARA CENTRAR LEER OPCION
-// =============================================================================
-Funcion   LeerCentrado(opc Por Referencia)
-    Definir ancho_consola, espacios, i Como Entero
-    ancho_consola <- 80  // ancho total de la "pantalla" virtual
-    espacios <- (ancho_consola - Longitud(mensaje)) / 2
-	
-    Para i <- 1 Hasta espacios Hacer
-        Escribir Sin Saltar " "
-    FinPara
-	
-    Escribir Sin Saltar ""
-    Leer opc
-	
-FinFuncion
-
-// =============================================================================
-// FUNCIÓN #7: INSERTAR NUMERO VALIDO
+// FUNCIÓN #6: INSERTAR NUMERO VALIDO
 // =============================================================================
 Funcion ObtenerDigitoValido(0)
     Definir entrada Como Caracter
@@ -698,7 +724,7 @@ Funcion ObtenerDigitoValido(0)
 	FinMientras
 FinFuncion
 // =============================================================================
-// FUNCIÓN #8: SELECCION DE DIFICULTAD
+// FUNCIÓN #7: SELECCION DE DIFICULTAD
 // =============================================================================
 Funcion dificultad <- MenuDificultad(0)
     Definir opcion_dificultad, i Como Entero
@@ -742,7 +768,7 @@ Funcion dificultad <- MenuDificultad(0)
     dificultad <- opcion_dificultad
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #9: COMIENZO GOLAZO!
+// FUNCIÓN #8: COMIENZO GOLAZO!
 // =============================================================================
 Funcion AnimacionInicio(0)
 	Definir i, j Como Entero
@@ -844,7 +870,7 @@ Funcion AnimacionInicio(0)
 	Esperar 300 Milisegundos
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #10: ANIMACION DE LOS PENALES
+// FUNCIÓN #9: ANIMACION DE LOS PENALES
 // =============================================================================
 Funcion animacionDeJugada(esGol)
 	Definir i Como Entero
@@ -984,6 +1010,7 @@ Funcion animacionDeJugada(esGol)
     Sino
         //ANIMACION SI ES ATAJADA
 		//FRAME 1
+		Limpiar Pantalla
         CentradoVertical(5)
         CentrarTexto("       +-----------------------------------------------------+")
 		CentrarTexto("       |        .                                            |")
@@ -1141,7 +1168,7 @@ Funcion animacionDeJugada(esGol)
     FinSi
 FinFuncion
 // =============================================================================
-// FUNCIÓN #11: CENTRADO VERTICAL
+// FUNCIÓN #10: CENTRADO VERTICAL
 // =============================================================================
 Funcion CentradoVertical(cantidad_lineas)
 	Definir i Como Entero
