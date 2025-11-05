@@ -512,7 +512,7 @@ Funcion EjecutarModoApuestas(0)
 				CentrarTexto("       Opcion invalida. Elige 1 o 2.")
 				Esperar 1 Segundos
 				// Volver a dibujar la pantalla para que se vea limpia
-				Limpiar Pantalla;
+				Limpiar Pantalla
 				Para i <- 1 Hasta 5 Hacer
 					Escribir ""
 				FinPara
