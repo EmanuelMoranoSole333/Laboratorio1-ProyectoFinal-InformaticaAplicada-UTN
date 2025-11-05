@@ -704,27 +704,7 @@ Funcion CentrarTexto(texto_a_centrar)
     Escribir margen, texto_a_centrar
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #6: INSERTAR NUMERO VALIDO
-// =============================================================================
-Funcion ObtenerDigitoValido(0)
-    Definir entrada Como Caracter
-    Definir digito, DigitoValido Como Entero
-	
-    Mientras Verdadero Hacer
-        Escribir ""
-        Escribir "Elegi una posicion (0-9):"
-        Leer entrada
-		
-        Si Longitud(entrada) = 1 Y (entrada >= "0" Y entrada <= "9") Entonces
-            digito <- ConvertirANumero(entrada)
-            DigitoValido <- digito   // << esto devuelve el valor
-		SiNo
-			Escribir "Entrada invalida. Debes ingresar un numero del 0 al 9."
-		FinSi
-	FinMientras
-FinFuncion
-// =============================================================================
-// FUNCIÓN #7: SELECCION DE DIFICULTAD
+// FUNCIÓN #6: SELECCION DE DIFICULTAD
 // =============================================================================
 Funcion dificultad <- MenuDificultad(0)
     Definir opcion_dificultad, i Como Entero
@@ -768,7 +748,7 @@ Funcion dificultad <- MenuDificultad(0)
     dificultad <- opcion_dificultad
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #8: COMIENZO GOLAZO!
+// FUNCIÓN #7: COMIENZO GOLAZO!
 // =============================================================================
 Funcion AnimacionInicio(0)
 	Definir i, j Como Entero
@@ -870,7 +850,7 @@ Funcion AnimacionInicio(0)
 	Esperar 300 Milisegundos
 Fin Funcion
 // =============================================================================
-// FUNCIÓN #9: ANIMACION DE LOS PENALES
+// FUNCIÓN #8: ANIMACION DE LOS PENALES
 // =============================================================================
 Funcion animacionDeJugada(esGol)
 	Definir i Como Entero
@@ -1168,7 +1148,7 @@ Funcion animacionDeJugada(esGol)
     FinSi
 FinFuncion
 // =============================================================================
-// FUNCIÓN #10: CENTRADO VERTICAL
+// FUNCIÓN #9: CENTRADO VERTICAL
 // =============================================================================
 Funcion CentradoVertical(cantidad_lineas)
 	Definir i Como Entero
